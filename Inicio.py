@@ -91,13 +91,13 @@ with st.container():
     st.markdown("**📄 Documentos** (uno por línea)")
     text_input = st.text_area(
         "",
-        "The dog barks loudly.\nThe cat meows at night.\nThe dog and the cat play together.",
+        "My mom shouts.\nThat cat is so chunky.\nI wanna play videogames.",
         height=120,
         label_visibility="collapsed"
     )
     
     st.markdown("**❓ Pregunta**")
-    question = st.text_input("", "Who is playing?", label_visibility="collapsed")
+    question = st.text_input("", "Who is chunky?", label_visibility="collapsed")
     
     st.markdown('</div>', unsafe_allow_html=True)
 
