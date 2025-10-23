@@ -87,7 +87,6 @@ st.markdown('<div class="subtitle">Análisis de similitud semántica usando TF-I
 
 # Sección de entrada
 with st.container():
-    st.markdown('<div class="input-section">', unsafe_allow_html=True)
     
     st.markdown("**📄 Documentos** (uno por línea)")
     text_input = st.text_area(
@@ -115,13 +114,13 @@ def tokenize_and_stem(text: str):
 # Botón de cálculo centrado
 col1, col2, col3 = st.columns([1, 2, 1])
 with col2:
-    if st.button("🚀 Calcular Similitud", use_container_width=True):
+    if st.button("Calcular Similitud", use_container_width=True):
         documents = [d.strip() for d in text_input.split("\n") if d.strip()]
         
         if len(documents) < 1:
             st.warning("⚠️ Ingresa al menos un documento.")
         else:
-            with st.spinner("🔍 Analizando similitudes..."):
+            with st.spinner("Analizando similitudes..."):
                 # Vectorizador con stemming
                 vectorizer = TfidfVectorizer(
                     tokenizer=tokenize_and_stem,
@@ -170,7 +169,7 @@ with col2:
                 st.markdown('</div>', unsafe_allow_html=True)
 
                 # MATRIZ TF-IDF
-                with st.expander("📊 Matriz TF-IDF", expanded=False):
+                with st.expander("Matriz TF-IDF", expanded=False):
                     df_tfidf = pd.DataFrame(
                         X.toarray(),
                         columns=vectorizer.get_feature_names_out(),
@@ -179,7 +178,7 @@ with col2:
                     st.dataframe(df_tfidf.round(3), use_container_width=True)
 
                 # TODAS LAS SIMILITUDES
-                with st.expander("📈 Todas las Similitudes", expanded=True):
+                with st.expander("Todas las Similitudes", expanded=True):
                     sim_df = pd.DataFrame({
                         "Documento": [f"Doc {i+1}" for i in range(len(documents))],
                         "Similitud": similarities,
@@ -208,7 +207,7 @@ with col2:
                             st.divider()
 
                 # STEMS COINCIDENTES
-                with st.expander("🔤 Stems Coincidentes", expanded=False):
+                with st.expander("Stems Coincidentes", expanded=False):
                     vocab = vectorizer.get_feature_names_out()
                     q_stems = tokenize_and_stem(question)
                     matched = [s for s in q_stems if s in vocab and df_tfidf.iloc[best_idx].get(s, 0) > 0]
@@ -235,7 +234,7 @@ with st.expander("ℹ️ Acerca del análisis", expanded=False):
     - Compara vectores TF-IDF
     - Rango: 0 (sin similitud) a 1 (idéntico)
     
-    **📊 Interpretación:**
+    **Interpretación:**
     - 🟢 > 0.5: Alta similitud
     - 🟠 0.2 - 0.5: Similitud media  
     - 🔴 < 0.2: Baja similitud
